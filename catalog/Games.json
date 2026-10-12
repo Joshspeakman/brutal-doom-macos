@@ -94,5 +94,74 @@
     ],
     "profile": "Brutal Hexen RPG",
     "defaults": "Defaults/Hexen.ini"
+  },
+  {
+    "id": "schism",
+    "title": "Schism — Four Heroes",
+    "version": "0.97D + community fixes 0.1",
+    "description": "Choose a Marine, Paladin, Sorcerer or Heretic and fight through Doom II with guns, melee or magic. F1 opens the class guide.",
+    "controls": "Q kick · R reload/stance/mana · F weapon special\nG grenade/magic wall · H class ability · V battlecry",
+    "iwad": "IWADs/DOOM2.WAD",
+    "mods": [
+      "Mods/Schism/Schism_097D.pk3",
+      "Mods/Schism/Schism_097D_Patch.0.1_Public.pk3"
+    ],
+    "profile": "Schism",
+    "defaults": "Defaults/Schism.ini"
+  },
+  {
+    "id": "projectbrutality",
+    "title": "Project Brutality",
+    "version": "0.4.1 · tagged development release",
+    "description": "Doom II with a larger arsenal, weapon upgrades and new enemy variants. Start a new game to choose your difficulty.",
+    "controls": "R reload · Q kick · F flashlight · G equipment\nV melee · Alt dash · X weapon wheel · Z equipment wheel",
+    "iwad": "IWADs/DOOM2.WAD",
+    "mods": [
+      "Mods/ProjectBrutality/Project_Brutality-0.4.1.pk3"
+    ],
+    "profile": "Project Brutality",
+    "defaults": "Defaults/ProjectBrutality.ini"
+  },
+  {
+    "id": "pbmonsters",
+    "title": "Brutal Doom — Expanded Monsters",
+    "version": "Brutal Doom v21 Gold + PB Monsters (2022)",
+    "description": "Brutal Doom weapons against additional Project Brutality demon variants. This older community add-on has known sprite issues.",
+    "controls": "R reload · Q kick · F flashlight · G grenade · X dual wield",
+    "iwad": "IWADs/DOOM2.WAD",
+    "mods": [
+      "Mods/brutalv21.pk3",
+      "Mods/PBMonsters/bd21_pb-monsters.pk3"
+    ],
+    "profile": "Brutal Doom Expanded Monsters",
+    "defaults": "Defaults/PBMonsters.ini"
+  },
+  {
+    "id": "aliens",
+    "title": "Aliens: Eradication",
+    "version": "Total Conversion 2.0 · Eradication campaign",
+    "description": "Four classes, Xenomorphs, company troops and combat droids in a dedicated eight-map campaign. Start with A Few Aliens for atmosphere.",
+    "controls": "F flashlight · Z flare · T turret · Y drone\nB tracker · U adrenaline · Middle click iron sights",
+    "iwad": "IWADs/DOOM2.WAD",
+    "mods": [
+      "Mods/Aliens/ALIENS_ERADICATION_TC_2_0.pk3",
+      "Mods/Aliens/ERADICATION_MAPSET_2_0.wad"
+    ],
+    "profile": "Aliens Eradication",
+    "defaults": "Defaults/Aliens.ini"
+  },
+  {
+    "id": "lambda",
+    "title": "Lambda — Half-Life Arsenal",
+    "version": "October 8, 2023 · original weapon models",
+    "description": "Half-Life and Opposing Force weapons, HEV suit and items in Doom II. Includes Lambda’s gameplay and monster adjustments.",
+    "controls": "R reload · F flashlight · Q previous weapon\nRight click alternate fire · [ / ] inventory · Enter use",
+    "iwad": "IWADs/DOOM2.WAD",
+    "mods": [
+      "Mods/Lambda/Lambda_Resources.pk3",
+      "Mods/Lambda/Lambda_Code.pk3"
+    ],
+    "profile": "Lambda",
+    "defaults": "Defaults/Lambda.ini"
   }
 ]

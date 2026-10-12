@@ -13,6 +13,11 @@ struct Game: Codable {
         case "wolfenstein": return "Wolfenstein 3D"
         case "doom64": return "Doom 64 · Veteran of Hell"
         case "hexen": return "Hexen RPG · Beta"
+        case "schism": return "Schism · Four Heroes"
+        case "projectbrutality": return "Project Brutality"
+        case "pbmonsters": return "Brutal Doom · Expanded Monsters"
+        case "aliens": return "Aliens · Eradication"
+        case "lambda": return "Lambda · Half-Life Arsenal"
         default: return title
         }
     }

@@ -45,4 +45,10 @@ for key,path,name in [
  ('doom64-logo','Mods/Doom64/BD64-VoH_maps_v1.6.1.pk3','textures/misc/BD64LOGO.png'),
  ('hexen-logo','Mods/Hexen/BrutalHexenRPG_V8.0_beta.pk3','GRAPHICS/M_HTIC.png')]:
  (out/(key+'.png')).write_bytes(member(path,name))
+for key,path,name in [
+ ('schism','Mods/Schism/Schism_097D.pk3','Graphics/MISC/TITLEPIC.png'),
+ ('projectbrutality','Mods/ProjectBrutality/Project_Brutality-0.4.1.pk3','STARTUP.png'),
+ ('aliens','Mods/Aliens/ALIENS_ERADICATION_TC_2_0.pk3','GRAPHICS/Alien Trilogy/TITLEPIC.png')]:
+ if (base/path).exists():
+  (out/(key+'.png')).write_bytes(member(path,name))
 print('Extracted',len(list(out.glob('*.png'))),'local artwork files.')

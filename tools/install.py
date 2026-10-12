@@ -1,8 +1,18 @@
 from pathlib import Path
-import sys,shutil,subprocess,plistlib,os
+import sys,shutil,subprocess,plistlib,os,json
 root=Path(__file__).resolve().parent.parent
 base=Path(sys.argv[1]).expanduser().resolve(); apps=Path(sys.argv[2]).expanduser().resolve()
 apps.mkdir(parents=True,exist_ok=True)
+# Append new built-in choices without replacing custom entries or existing choices.
+catalog=base/'Games.json'
+if catalog.exists():
+ current=json.loads(catalog.read_text())
+ known={game['id'] for game in current}
+ additions=[game for game in json.loads((root/'catalog/Games.json').read_text()) if game['id'] not in known]
+ if additions:
+  staged=catalog.with_suffix('.json.new')
+  staged.write_text(json.dumps(current+additions,indent=2,ensure_ascii=False)+'\n')
+  staged.replace(catalog)
 for src in (root/'catalog').rglob('*'):
  if src.is_file():
   dst=base/src.relative_to(root/'catalog')

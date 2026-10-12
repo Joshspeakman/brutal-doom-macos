@@ -88,14 +88,24 @@ final class Backdrop: NSView {
         }
         let hero = NSRect(x: 0, y: 0, width: bounds.width, height: 252)
         NSGraphicsContext.saveGraphicsState(); NSBezierPath(rect: hero).addClip()
-        if let image = art(gameID) {
+        if let image = art(gameID == "pbmonsters" ? "doom2" : gameID) {
             NSGraphicsContext.current?.imageInterpolation = .high
             image.draw(in: NSRect(x: 272, y: -26, width: 510, height: 319), from: .zero, operation: .sourceOver, fraction: 0.92, respectFlipped: true, hints: nil)
+        }
+        if gameID == "lambda" {
+            ("λ" as NSString).draw(at: NSPoint(x: 480, y: -18), withAttributes: [.font: NSFont.systemFont(ofSize: 230, weight: .bold), .foregroundColor: NSColor.systemOrange.withAlphaComponent(0.65)])
         }
         NSGradient(colorsAndLocations: (NSColor(white: 0.025, alpha: 1), 0), (NSColor(white: 0.025, alpha: 0.93), 0.32), (NSColor(white: 0.025, alpha: 0.10), 0.72), (NSColor.clear, 1))!.draw(in: hero, angle: 0)
         NSGradient(starting: .clear, ending: NSColor(white: 0.025, alpha: 1))!.draw(in: NSRect(x: 0, y: 185, width: bounds.width, height: 67), angle: 90)
         NSGraphicsContext.restoreGraphicsState()
-        let family: (String, String) = gameID.hasPrefix("chex") ? ("BRUTAL", "CHEX QUEST") : gameID == "wolfenstein" ? ("BRUTAL", "WOLFENSTEIN") : gameID == "hexen" ? ("BRUTAL", "HEXEN RPG") : gameID == "doom64" ? ("BRUTAL", "DOOM 64") : ("BRUTAL", "DOOM")
+        let specialTitles: [String: (String, String)] = [
+            "schism": ("SCHISM", "FOUR HEROES"),
+            "projectbrutality": ("PROJECT", "BRUTALITY"),
+            "pbmonsters": ("BRUTAL DOOM", "EXPANDED MONSTERS"),
+            "aliens": ("ALIENS", "ERADICATION"),
+            "lambda": ("LAMBDA", "HALF-LIFE ARSENAL")
+        ]
+        let family: (String, String) = specialTitles[gameID] ?? (gameID.hasPrefix("chex") ? ("BRUTAL", "CHEX QUEST") : gameID == "wolfenstein" ? ("BRUTAL", "WOLFENSTEIN") : gameID == "hexen" ? ("BRUTAL", "HEXEN RPG") : gameID == "doom64" ? ("BRUTAL", "DOOM 64") : ("BRUTAL", "DOOM"))
         let shadow = NSShadow(); shadow.shadowColor = NSColor.black; shadow.shadowOffset = NSSize(width: 1, height: -3); shadow.shadowBlurRadius = 5
         let attributes: [NSAttributedString.Key: Any] = [.font: copper(47, bold: true), .foregroundColor: parchment, .strokeColor: NSColor(srgbRed: 0.38, green: 0.17, blue: 0.09, alpha: 1), .strokeWidth: -2, .shadow: shadow, .kern: 2]
         (family.0 as NSString).draw(at: NSPoint(x: 42, y: 51), withAttributes: attributes)

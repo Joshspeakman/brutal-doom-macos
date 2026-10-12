@@ -12,7 +12,7 @@ python3 - <<'PY'
 import plistlib
 from pathlib import Path
 p=Path('build/Brutal Doom.app/Contents/Info.plist')
-p.write_bytes(plistlib.dumps(dict(CFBundleName='Brutal Doom',CFBundleDisplayName='Brutal Doom',CFBundleIdentifier='local.joshuaspeakman.brutaldoom',CFBundleExecutable='BrutalDoomLauncher',CFBundlePackageType='APPL',CFBundleShortVersionString='1.2',CFBundleVersion='20261012.3',LSMinimumSystemVersion='11.0',NSHighResolutionCapable=True)))
+p.write_bytes(plistlib.dumps(dict(CFBundleName='Brutal Doom',CFBundleDisplayName='Brutal Doom',CFBundleIdentifier='local.joshuaspeakman.brutaldoom',CFBundleExecutable='BrutalDoomLauncher',CFBundlePackageType='APPL',CFBundleShortVersionString='1.3',CFBundleVersion='20261012.4',LSMinimumSystemVersion='11.0',NSHighResolutionCapable=True)))
 PY
 codesign --force --sign - "$app"
 codesign --verify --deep --strict "$app"
