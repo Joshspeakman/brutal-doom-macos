@@ -1,0 +1,20 @@
+name: Nightly launcher
+on:
+  push:
+    branches: [nightly]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Build and test the native launcher
+        run: ./build.sh
+      - name: Package launcher without game data
+        run: ditto -c -k --sequesterRsrc --keepParent 'build/Brutal Doom.app' 'build/Brutal-Doom-Launcher-macOS.zip'
+      - uses: actions/upload-artifact@v7.0.2
+        with:
+          name: Brutal-Doom-Launcher-macOS
+          path: build/Brutal-Doom-Launcher-macOS.zip

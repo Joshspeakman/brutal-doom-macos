@@ -1,0 +1,98 @@
+[
+  {
+    "id": "doom2",
+    "title": "Brutal Doom — Doom II",
+    "version": "Brutal Doom v21 Gold",
+    "description": "The original Doom II campaign with Brutal Doom weapons, combat and effects.",
+    "controls": "R reload · Q kick · F flashlight · G grenade · X dual wield",
+    "iwad": "IWADs/DOOM2.WAD",
+    "mods": [
+      "Mods/brutalv21.pk3"
+    ],
+    "profile": "Doom II",
+    "defaults": "Defaults.ini"
+  },
+  {
+    "id": "doom",
+    "title": "Brutal Doom — Doom",
+    "version": "Brutal Doom v21 Gold",
+    "description": "The Ultimate Doom campaign with Brutal Doom weapons, combat and effects.",
+    "controls": "R reload · Q kick · F flashlight · G grenade · X dual wield",
+    "iwad": "IWADs/DOOM.WAD",
+    "mods": [
+      "Mods/brutalv21.pk3"
+    ],
+    "profile": "Doom",
+    "defaults": "Defaults.ini"
+  },
+  {
+    "id": "chex",
+    "title": "Brutal Chex Quest — Original",
+    "version": "Brutal Doom v21 + Chex patch (July 2020)",
+    "description": "The original cereal-box adventure with brutal combat and green Flemoid blood. Includes the keys, doors and pickups compatibility patch.",
+    "controls": "R reload · Q kick · F flashlight · G grenade · X dual wield",
+    "iwad": "IWADs/chex.wad",
+    "mods": [
+      "Mods/brutalv21.pk3",
+      "Mods/Chex/cheques-07082020.pk3"
+    ],
+    "profile": "Brutal Chex Original",
+    "defaults": "Defaults/Chex.ini"
+  },
+  {
+    "id": "chex3",
+    "title": "Brutal Chex Quest — Trilogy",
+    "version": "Chex Quest 3 v1.4 + Brutal Doom v21 + Chex patch",
+    "description": "Three Chex episodes, including the revisited first two games. Uses the classic release supported by the Brutal Chex patch.",
+    "controls": "R reload · Q kick · F flashlight · G grenade · X dual wield",
+    "iwad": "IWADs/chex3.wad",
+    "mods": [
+      "Mods/brutalv21.pk3",
+      "Mods/Chex/cheques-07082020.pk3"
+    ],
+    "profile": "Brutal Chex Trilogy",
+    "defaults": "Defaults/Chex.ini"
+  },
+  {
+    "id": "wolfenstein",
+    "title": "Brutal Wolfenstein 3D",
+    "version": "ZioMcCall’s Brutal Wolfenstein v7.2",
+    "description": "A full Wolfenstein and Spear of Destiny conversion: rebuilt maps, its own weapons and enemies, and bonus episodes.",
+    "controls": "R reload · Q/C kick · G grenade · V melee · Z slide",
+    "iwad": "IWADs/DOOM2.WAD",
+    "mods": [
+      "Mods/Wolfenstein/ZMC-BWV7.2.pk3"
+    ],
+    "profile": "Brutal Wolfenstein",
+    "defaults": "Defaults/Wolfenstein.ini"
+  },
+  {
+    "id": "doom64",
+    "title": "Brutal Doom 64 — Veteran of Hell",
+    "version": "Veteran of Hell v1.6.1",
+    "description": "Doom 64 campaigns, atmosphere and music with expanded brutal combat. Choose a classic or tactical class in New Game.",
+    "controls": "R reload · Q kick · G throw · M place mine · V special · F flashlight",
+    "iwad": "IWADs/DOOM2.WAD",
+    "mods": [
+      "Mods/Doom64/BD64-VoH_game_v1.6.1.pk3",
+      "Mods/Doom64/BD64-VoH_maps_v1.6.1.pk3"
+    ],
+    "profile": "Brutal Doom 64",
+    "defaults": "Defaults/Doom64.ini"
+  },
+  {
+    "id": "hexen",
+    "title": "Brutal Hexen RPG",
+    "version": "ZDL Edition v8.0 beta · HD textures + Hexen 64 music",
+    "description": "Hexen with brutal melee, RPG progression, companions and class choices. This upstream release is a beta; read the included starter guide.",
+    "controls": "Q special/melee · F flechette · M RPG menu · R familiar\nG gather water · 0 torch · [ / ] inventory · Enter use item",
+    "iwad": "IWADs/HEXEN.WAD",
+    "mods": [
+      "Mods/Hexen/BrutalHexenRPG_V8.0_beta.pk3",
+      "Mods/Hexen/hexen_gz.pk3",
+      "Mods/Hexen/3_HEXEN64.wad"
+    ],
+    "profile": "Brutal Hexen RPG",
+    "defaults": "Defaults/Hexen.ini"
+  }
+]

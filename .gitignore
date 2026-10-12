@@ -1,0 +1,12 @@
+build/
+.dist/
+.DS_Store
+*.app/
+*.zip
+*.wad
+*.WAD
+*.pk3
+*.rar
+LauncherArt/
+Assets/
+Profiles/
