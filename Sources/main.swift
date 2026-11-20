@@ -32,6 +32,15 @@ final class Launcher: NSObject, NSApplicationDelegate, NSWindowDelegate {
             guard !games.isEmpty, Set(games.map(\.id)).count == games.count else { throw NSError(domain: "BrutalDoom", code: 2, userInfo: [NSLocalizedDescriptionKey: "The game catalog is empty or contains duplicate entries."]) }
             selected = games.firstIndex { $0.id == UserDefaults.standard.string(forKey: "lastGame") } ?? 0
             buildWindow(); refresh()
+            // BRUTAL_DOOM_LAUNCHER_SHOT=<png>: the window drawn to an image instead of shown (screenshots for the README)
+            if let shot = ProcessInfo.processInfo.environment["BRUTAL_DOOM_LAUNCHER_SHOT"] {
+                NSApp.setActivationPolicy(.accessory)
+                let view = window.contentView!; view.layoutSubtreeIfNeeded()
+                guard let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds) else { NSApp.terminate(nil); return }
+                view.cacheDisplay(in: view.bounds, to: rep)
+                try? rep.representation(using: .png, properties: [:])?.write(to: URL(fileURLWithPath: shot))
+                NSApp.terminate(nil); return
+            }
             window.center(); window.makeKeyAndOrderFront(nil); NSApp.activate(ignoringOtherApps: true)
         } catch { showError(error); NSApp.terminate(nil) }
     }
