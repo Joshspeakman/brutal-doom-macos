@@ -7,7 +7,7 @@ swiftc Sources/Model.swift Tests/ModelTests.swift -o build/model-tests
 build/model-tests
 app='build/Brutal Doom.app'
 mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources"
-swiftc -O -target arm64-apple-macosx11.0 Sources/Model.swift Sources/Theme.swift Sources/main.swift -o "$app/Contents/MacOS/BrutalDoomLauncher"
+swiftc -O -target arm64-apple-macosx11.0 Sources/Model.swift Sources/Theme.swift Sources/main.swift -framework GameController -o "$app/Contents/MacOS/BrutalDoomLauncher"
 python3 - <<'PY'
 import plistlib
 from pathlib import Path

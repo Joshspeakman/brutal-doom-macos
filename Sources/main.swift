@@ -1,4 +1,5 @@
 import AppKit
+import GameController
 
 final class Launcher: NSObject, NSApplicationDelegate, NSWindowDelegate {
     let store = CollectionStore(base: (ProcessInfo.processInfo.environment["BRUTAL_DOOM_DATA_DIR"] ?? Bundle.main.object(forInfoDictionaryKey: "BrutalDoomDataDirectory") as? String).map { URL(fileURLWithPath: $0) } ?? FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Games/Brutal Doom"))
@@ -12,6 +13,8 @@ final class Launcher: NSObject, NSApplicationDelegate, NSWindowDelegate {
     var section: String?
     var process: Process?
     var log: FileHandle?
+    /// Quick exit from a controller: View + Menu held 1.5 s ends the running game (GZDoom has no button combos to bind).
+    var quitWatch: Timer?, quitSince: Date?, quitRequested = false
     var gameButton: MetalButton!
     var gameVersion: NSTextField!
     var descriptionField: NSTextField!
@@ -32,6 +35,9 @@ final class Launcher: NSObject, NSApplicationDelegate, NSWindowDelegate {
             guard !games.isEmpty, Set(games.map(\.id)).count == games.count else { throw NSError(domain: "BrutalDoom", code: 2, userInfo: [NSLocalizedDescriptionKey: "The game catalog is empty or contains duplicate entries."]) }
             selected = games.firstIndex { $0.id == UserDefaults.standard.string(forKey: "lastGame") } ?? 0
             buildWindow(); refresh()
+            if ProcessInfo.processInfo.environment["BRUTAL_DOOM_QA_PLAY"] != nil {     // development: Play pressed once up
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in self?.startGame(NSButton()) }
+            }
             // BRUTAL_DOOM_LAUNCHER_SHOT=<png>: the window drawn to an image instead of shown (screenshots for the README)
             if let shot = ProcessInfo.processInfo.environment["BRUTAL_DOOM_LAUNCHER_SHOT"] {
                 NSApp.setActivationPolicy(.accessory)
@@ -194,7 +200,8 @@ final class Launcher: NSObject, NSApplicationDelegate, NSWindowDelegate {
             child.terminationHandler = { p in DispatchQueue.main.async {
                 try? output.close(); self.log = nil; self.process = nil
                 NSApp.unhide(nil); self.window.makeKeyAndOrderFront(nil); NSApp.activate(ignoringOtherApps: true); self.refresh()
-                if p.terminationStatus != 0 {
+                self.quitWatch?.invalidate()
+                if p.terminationStatus != 0 && !self.quitRequested {
                     let alert = NSAlert(); alert.messageText = "\(launchedGame.title) stopped unexpectedly"
                     alert.informativeText = "Its Last Run.log is in the game's profile folder."
                     alert.addButton(withTitle: "OK"); alert.addButton(withTitle: "Show Log")
@@ -203,6 +210,19 @@ final class Launcher: NSObject, NSApplicationDelegate, NSWindowDelegate {
             }}
             process = child
             do { try child.run() } catch { process = nil; try? output.close(); log = nil; throw error }
+            if #available(macOS 11.3, *) { GCController.shouldMonitorBackgroundEvents = true }   // the game is frontmost; the launcher still sees the pad
+            quitRequested = false; quitSince = nil; quitWatch?.invalidate()
+            let started = Date(), qa = ProcessInfo.processInfo.environment["BRUTAL_DOOM_QA_QUIT"] == "hold"
+            quitWatch = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self] timer in
+                guard let self, let running = self.process, running.isRunning else { timer.invalidate(); return }
+                let held = GCController.controllers().contains { c in
+                    guard let g = c.extendedGamepad else { return false }
+                    return g.buttonMenu.isPressed && (g.buttonOptions?.isPressed ?? false)
+                } || (qa && Date().timeIntervalSince(started) >= 3)
+                if !held { self.quitSince = nil; return }
+                if self.quitSince == nil { self.quitSince = Date(); return }
+                if Date().timeIntervalSince(self.quitSince!) >= 1.5 { self.quitRequested = true; running.terminate(); timer.invalidate() }
+            }
             window.orderOut(nil); NSApp.hide(nil)
         } catch { showError(error) }
     }
